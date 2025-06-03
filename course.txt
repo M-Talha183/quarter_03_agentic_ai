@@ -1,0 +1,117 @@
+)
+
+📅 Day 1: Introduction & Environment Setup
+Topics:
+What is agentic AI?
+
+Role of LLMs in agents
+
+Gemini vs OpenAI
+
+Project structure using OpenAI SDK style
+
+Installing dependencies with uv
+
+Gemini API key setup
+
+Hands-on:
+Install google-generativeai, python-dotenv
+
+Create .env and securely load Gemini key
+
+Make your first Gemini API call (text-only)
+
+📅 Day 2: Building a Simple Chatbot (GPT-style)
+Topics:
+Prompt → Response cycle using gemini-pro
+
+Simulate ChatCompletion from OpenAI SDK
+
+Response formatting & printing
+
+Hands-on:
+Build gemini_chat.py to send user prompts
+
+Return nicely formatted answers
+
+Add basic prompt memory (1-turn)
+
+📅 Day 3: Multi-Turn Chat Interface
+Topics:
+Maintaining chat history
+
+Gemini conversation object
+
+Mimic messages=[{"role": "user"…}] OpenAI style
+
+Hands-on:
+Create Conversation manager class
+
+Store multi-turn memory
+
+Add basic CLI chat loop
+
+📅 Day 4: Modular Agent Architecture
+Topics:
+What is an agent in AI?
+
+Structure: tools, memory, controller
+
+Difference between OpenAI agent tools and custom agents
+
+Hands-on:
+Create modular folders: /agents, /tools, /memory
+
+Build a Gemini-powered Agent class
+
+Setup input → reason → response pipeline
+
+📅 Day 5: Add Tools (Search, Math, File Read)
+Topics:
+Simulating OpenAI tools/functions
+
+Building custom tools (functions) for Gemini
+
+Reasoning and tool selection
+
+Hands-on:
+Implement basic tools:
+
+MathTool
+
+FileReaderTool
+
+Dummy Web Search Tool
+
+Gemini generates a plan and selects tool
+
+📅 Day 6: Agent Use Cases & Mini Project
+Topics:
+Use case: Document QA / Chat Assistant / Planner
+
+Best practices
+
+Cost-saving techniques
+
+Limitations & alternatives
+
+Hands-on:
+Choose 1 project:
+
+Chat with PDF
+
+Personal Task Planner
+
+Student Assistant
+
+Build and present final version using Gemini + OpenAI-style agent
+
+✅ Final Output
+You’ll finish with:
+
+OpenAI SDK-style project with Gemini as the model
+
+Modular agent framework (reusable)
+
+Working prototype of an assistant
+
