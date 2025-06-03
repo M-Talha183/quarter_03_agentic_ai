@@ -12,7 +12,7 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 # Get user input
 user_prompt = input("Enter your prompt for Gemini: ")
-
+#  sve the api key
 # Generate content from user input
 response = model.generate_content(user_prompt)
 
