@@ -27,7 +27,7 @@ config = RunConfig(
      
 agent = Agent(
     name = "Teacher",
-    instructions = "You are a Python Teacher."
+    instructions = "You are a Web development Teacher."
 )
 
 prompt = input("Hello, How can i assist you?\n")
