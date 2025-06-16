@@ -1,0 +1,7 @@
+create Booking Model 
+Fields 
+user_id : int
+room_id : int 
+nights : int (must be >= 1)
+rate_per_night : float 
+Also Add computed fields : total amount = nights * rate_per_night
