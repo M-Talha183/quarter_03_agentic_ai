@@ -11,7 +11,7 @@ gemini_api = os.getenv("GEMINI_API_KEY")
 if not gemini_api :
     raise ValueError ("GEMINI_API_KEY is not set , Please ensure it is defined in your .env file ")
 
-@cl.on_chat_start # type: ignore
+@cl.on_chat_start 
 async def start ():
 
     external_client = AsyncOpenAi(
@@ -34,12 +34,12 @@ async def start ():
     
     agent :Agent = Agent (
         name = "Assistant",
-        instructions= "You are a helpful Assistant. "
+        instructions= "You are a helpful Assistant. ",
         model = model
     )
     
     cl.user_session.set("agent",agent)
-    await cl.Message(content = "Welcome to the Panaversity Ai Assistan How can i help you  ").send()
+    await cl.Message(content = "Welcome to the Panaversity AI Assistan! How can I help you ").send()
     
     
 @cl.on_message
@@ -48,7 +48,7 @@ async def main(message : cl.Message):
     await msg.send()
     
     agent : Agent = cast(Agent,cl.user_session.get("agent"))    
-    congig : RunConfig = cast(RunConfig,cl.user_session.get("config")) 
+    config : RunConfig = cast(RunConfig,cl.user_session.get("config")) 
     
     history = cl.user_session.get("chat history ") or []
     
@@ -59,9 +59,9 @@ async def main(message : cl.Message):
         print("\n [CALLING_AGENT_WITH_CONTEXT]\n ",history,"\n")
         
         result = Runner.run_sync(
-            starting_agent= agent,
-            input= history
-            run_config= congig
+            starting_agent= agent ,
+            input= history ,
+            run_config= config 
         ) 
         response_content = result.final_output
         msg.content = response_content
@@ -69,5 +69,12 @@ async def main(message : cl.Message):
         await msg.update()
         
         cl.user_session.set("chat history", result.to_input_list)
-        print(f"")
-    except 
+        print(f"User :{message.content}")
+        print(f"Assistant :{response_content}")
+        
+        
+        
+    except Exception as e :
+        msg.content = f"Error : {str(e)}"
+        await msg.update()
+        print(f"Error : {str(e)}")
