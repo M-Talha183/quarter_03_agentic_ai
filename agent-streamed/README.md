@@ -1,25 +1,23 @@
-# 🧠 Streaming Agent with OpenAI SDK & Chainlit
+# 🧠 Agent with Streaming Responses using OpenAI SDK & Chainlit
 
 ## 🚀 Overview
 
-This project implements a **real-time streaming AI agent** using:
+This project implements an **agent-based conversational system** that supports **real-time streaming responses (token-by-token generation)**.
 
-- **Chainlit** for interactive chat UI  
-- **OpenAI SDK** (Async client)  
-- **Agentic AI framework** for context and memory management  
-- **Token-level streaming outputs** for faster response
+It uses:
 
-Supports **custom LLMs via OpenAI-compatible endpoints** (e.g., Gemini proxy, Claude, Llama through Groq/TogetherAI)
+- **Chainlit** for interactive front-end  
+- **OpenAI SDK (Async)** for calling LLMs with streaming outputs  
+- **Agentic AI structure** to handle **chat history, instructions, and memory**  
 
 ---
 
 ## 🛠️ Features
 
-- ✅ **Streaming token-by-token responses**  
-- ✅ **Agentic design (stateful conversations, chat history)**  
-- ✅ **Chainlit-based front-end**  
-- ✅ **Async OpenAI API usage**  
-- ✅ **Easily pluggable with other LLMs via OpenAI-compatible APIs**
+- ✅ **Token Streaming** for fast, real-time responses  
+- ✅ **Agent-based context management**  
+- ✅ **Chainlit interactive chat interface**  
+- ✅ **LLM agnostic**: Supports OpenAI, Gemini (via OpenAI-compatible proxy), Claude, etc.
 
 ---
 
@@ -28,8 +26,8 @@ Supports **custom LLMs via OpenAI-compatible endpoints** (e.g., Gemini proxy, Cl
 - **Python**  
 - **Chainlit**  
 - **OpenAI SDK (AsyncOpenAI)**  
-- **Agentic Framework / Runner**  
-- **Dotenv for config management**
+- **Agentic AI Framework (custom agents + runner)**  
+- **Dotenv for environment configs**
 
 ---
 
