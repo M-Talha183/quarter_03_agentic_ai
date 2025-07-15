@@ -26,6 +26,4 @@ async def start():
 async def main(message: cl.Message):
     user_input = message.content
     responce = await my_agent(user_input)
-    await cl.Message(
-        content=f"{responce}"
-    ).send()
+    await cl.Message(content=f"{responce}").send()
