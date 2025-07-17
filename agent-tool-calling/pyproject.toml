@@ -8,4 +8,7 @@ dependencies = [
     "chainlit>=2.6.2",
     "openai-agents>=0.2.1",
     "python-dotenv>=1.1.1",
+    "selenium>=4.34.2",
+    "twilio>=9.6.5",
+    "webdriver-manager>=4.0.2",
 ]

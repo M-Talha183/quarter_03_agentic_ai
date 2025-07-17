@@ -1,0 +1,12 @@
+[6044:6256:0717/105302.990:INFO:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:202] No machine level policy manager exists.
+[6044:6256:0717/105304.191:INFO:CONSOLE:163] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yS/r/uA0KM_Keq4L.js (163)
+[6044:2488:0717/105307.305:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[6044:8072:0717/105307.305:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[6044:13392:0717/105307.433:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[6044:6076:0717/105317.962:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[6044:13392:0717/105330.340:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[6044:8072:0717/105332.963:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[6044:6076:0717/105347.966:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[6044:8072:0717/105402.966:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[6044:7600:0717/105417.982:ERROR:components\system_cpu\cpu_probe_win.cc:112] PdhAddEnglishCounter failed for '\Processor(_Total)\% Processor Time': Error (0x13D) while retrieving error. (0xC0000BB8)
+[10096:8:0717/105422.283:WARNING:net\extras\sqlite\sqlite_persistent_store_backend_base.cc:176] Failed to post task from FlushAndNotifyInBackground@net\extras\sqlite\sqlite_persistent_store_backend_base.cc:226 to client_task_runner_.
