@@ -1,14 +1,19 @@
 from dotenv import load_dotenv
 from agents import (Agent , 
                     OpenAIChatCompletionsModel,
+                    set_tracing_disabled,
                     Runner ,input_guardrail , 
                     GuardrailFunctionOutput,
-                    InputGuardrailTripwireTriggered)
+                    InputGuardrailTripwireTriggered,
+                    TResponseInputItem,
+                    RunContextWrapper)
 from openai import AsyncOpenAI
 from pydantic import BaseModel
 import os 
+import chainlit as cl
 
 load_dotenv()
+set_tracing_disabled(disabled=True)
 
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 
@@ -25,47 +30,172 @@ model = OpenAIChatCompletionsModel(
     openai_client=provider
 )
 
-
-#  Create the input guardial type 
-
-class MathameticsOutPut (BaseModel):
-    is_math_home_work : bool
+class Out_Put_Python (BaseModel):
+    is_python_related : bool
     reasoning : str
-    
-guardial_agent = Agent(
-    name = "Guardrail check Agent ",
-    instructions= "Check is the User is asking you to do their maith work ",
-    output_type=MathameticsOutPut
+
+input_gardrial_agent = Agent(
+    name = "Input guardial agent ",
+    instructions="check the user input is related to python or not if related to python return true if not then return false ",
+    model=model,
+    output_type=Out_Put_Python
 )
+
 
 @input_guardrail
-async def math_guardrail(ctx,agent , input) -> GuardrailFunctionOutput:
-    print("Input Guardrail Prompt: ", input)
-    result = await Runner.run(starting_agent=guardial_agent,input=input) 
+async def input_gardrial_fun(
+    ctx : RunContextWrapper ,agent:Agent, input : str | list[TResponseInputItem]
+)-> GuardrailFunctionOutput :
     
-    return GuardrailFunctionOutput(
-        output_info=result.final_output,
-        tripwire_triggered=result.final_output.is_math_home_work
+    result = await Runner.run(
+        input_gardrial_agent,
+        input,
     )
-    
-agent = Agent(
-    name = "Customer Support agent ",
-    instructions="You are customer support agent you help customer with their question ",
-    model=model,
-    input_guardrails=[math_guardrail]
+
+    return GuardrailFunctionOutput(
+        output_info= result.final_output,
+        tripwire_triggered=not result.final_output.is_python_related
+    )
+
+
+main_agent = Agent(
+    name = "Python Expert ",
+    instructions="Your python programming languge expert with write coding , syntax , error handling and debuging in python related code ",
+    model= model,
+    input_guardrails=[input_gardrial_fun]
 )
 
-async def main ():
+
+
+
+@cl.on_chat_start
+async def on_chat_start_fun():
+    await cl.Message(content="I am Ready to Assist").send()
+
+@cl.on_message
+async def responce_fun (message:cl.Message):
     try:
-        
-        await Runner.run(starting_agent=agent,input="Hello can you help me solve 2*5")
-        print("Guardrial didnot trap this is unexpected ")
-        
+        result = await Runner.run(
+        main_agent,
+        input=message.content
+        )
+        await cl.Message(content=result.final_output).send()
     except InputGuardrailTripwireTriggered :
-        print("Math Home work guardrial tripped ")
+        await cl.Message(content="Please Ask Only Python Related Question ").send()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #  Create the input guardial type 
+
+# class MathameticsOutPut (BaseModel):
+#     is_math_home_work : bool
+#     reasoning : str
+    
+# guardial_agent = Agent(
+#     name = "Guardrail check Agent ",
+#     instructions= "Check is the User is asking you to do their maith work ",
+#     output_type=MathameticsOutPut
+# )
+
+# @input_guardrail
+# async def math_guardrail(ctx,agent , input) -> GuardrailFunctionOutput:
+#     print("Input Guardrail Prompt: ", input)
+#     result = await Runner.run(starting_agent=guardial_agent,input=input) 
+    
+#     return GuardrailFunctionOutput(
+#         output_info=result.final_output,
+#         tripwire_triggered=result.final_output.is_math_home_work
+#     )
+    
+# agent = Agent(
+#     name = "Customer Support agent ",
+#     instructions="You are customer support agent you help customer with their question ",
+#     model=model,
+#     input_guardrails=[math_guardrail]
+# )
+
+# async def main ():
+#     try:
+        
+#         await Runner.run(starting_agent=agent,input="Hello can you help me solve 2*5")
+#         print("Guardrial didnot trap this is unexpected ")
+        
+#     except InputGuardrailTripwireTriggered :
+#         print("Math Home work guardrial tripped ")
         
 
-import asyncio
+# import asyncio
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
