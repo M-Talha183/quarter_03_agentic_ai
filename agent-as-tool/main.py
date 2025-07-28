@@ -48,3 +48,4 @@ result = Runner.run_sync(
 
 print(result.final_output)
 print(result.final_output)
+print(result.final_output)
