@@ -5,7 +5,9 @@ from agents import (Agent ,
                     Runner ,input_guardrail , 
                     GuardrailFunctionOutput,
                     InputGuardrailTripwireTriggered,
+                    OutputGuardrailTripwireTriggered,
                     TResponseInputItem,
+                    output_guardrail,
                     RunContextWrapper)
 from openai import AsyncOpenAI
 from pydantic import BaseModel
@@ -74,11 +76,28 @@ out_put_gad_agent = Agent(
     
 )
 
+@output_guardrail
+async def ouput_gardrial_fun(
+    ctx : RunContextWrapper ,agent:Agent, output : ManageOutPut
+)-> GuardrailFunctionOutput :
+    
+    out_result = await Runner.run(
+        out_put_gad_agent,
+        output,
+    )
+
+    return GuardrailFunctionOutput(
+        output_info= out_result.final_output,
+        tripwire_triggered= not  out_result.final_output.is_python
+    )
+
+
 main_agent = Agent(
     name = "Python Expert ",
     instructions="Your python programming languge expert with write coding , syntax , error handling and debuging in python related code ",
     model= model,
-    input_guardrails=[input_gardrial_fun]
+    input_guardrails=[input_gardrial_fun],
+    output_guardrails=[ouput_gardrial_fun]
 )
 
 
@@ -98,6 +117,9 @@ async def responce_fun (message:cl.Message):
         await cl.Message(content=result.final_output).send()
     except InputGuardrailTripwireTriggered :
         await cl.Message(content="Please Ask Only Python Related Question ").send()
+    
+    except OutputGuardrailTripwireTriggered :
+        await cl.Message(content="out pus guardrial reject your query ")
 
 
 
