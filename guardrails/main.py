@@ -58,6 +58,22 @@ async def input_gardrial_fun(
     )
 
 
+
+class ManageOutPut (BaseModel):
+    responce : str
+
+class Python_out_put (BaseModel):
+    is_python : bool
+    reasoning : str 
+    
+out_put_gad_agent = Agent(
+    name = "output guardrails",
+    instructions="check it the out put includes any python related Ans",
+    output_type=Python_out_put,
+    model=model
+    
+)
+
 main_agent = Agent(
     name = "Python Expert ",
     instructions="Your python programming languge expert with write coding , syntax , error handling and debuging in python related code ",
