@@ -99,6 +99,7 @@ main_agent = Agent(
     input_guardrails=[input_gardrial_fun],
     output_guardrails=[ouput_gardrial_fun]
 )
+print("Hello World")
 
 
 
