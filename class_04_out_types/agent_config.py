@@ -1,5 +1,5 @@
 import os 
-from agents import Agent , OpenAIChatCompletionsModel , Runner , set_tracing_disabled 
+from agents import  OpenAIChatCompletionsModel , set_tracing_disabled , RunConfig
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
 
@@ -16,4 +16,8 @@ provider = AsyncOpenAI(
 model = OpenAIChatCompletionsModel(
     model= "gemini-2.0-flash",
     openai_client = provider
+)
+config = RunConfig(
+    model=model,
+    model_provider=provider
 )
