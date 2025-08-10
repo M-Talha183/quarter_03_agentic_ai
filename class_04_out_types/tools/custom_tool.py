@@ -52,28 +52,60 @@
 #     return f"Your Answer is: {n1 * n2}"
 
 
-from agents import function_tool
+from agents import function_tool , FunctionTool , RunContextWrapper
+from pydantic import BaseModel
+
+class MyTool(BaseModel):
+    n1: int
+    n2: int
+
+async def add_function(ctx: RunContextWrapper, args):
+    obj = MyTool.model_validate_json(args)
+    return f"your answer is: {obj.n1 + obj.n2}"
+
+add = FunctionTool(
+    name="add",
+    description="Adds two numbers",
+    params_json_schema=MyTool.model_json_schema(),
+    on_invoke_tool= add_function
+)
+
 
 @function_tool
-def add(n1: int, n2: int) -> str:
+async def add(n1: int, n2: int):
     """
     Adds two integers together.
+    args: 
+        n1: int
+        n2: int
+    returns:
+        AddResult
     """
     print("====> Tool is called <====")
-    return f"Your Answer is: {n1 + n2}"
+    return f"your answer is: {n1 + n2}"
 
 @function_tool
-def subtract(n1: int, n2: int) -> str:
+async def subtract(n1: int, n2: int):
     """
     Subtracts the second integer from the first.
+    args: 
+        n1: int
+        n2: int
+    returns:
+        SubtractResult
     """
     print("====> Tool is called <====")
-    return f"Your Answer is: {n1 - n2}"
+    return f"your answer is: {n1 - n2}"
 
 @function_tool
-def multiply(n1: int, n2: int) -> str:
+async def multiply(n1: int, n2: int) :
     """
     Multiplies two integers together.
+    args: 
+        n1: int
+        n2: int
+    returns:
+        MultiplyResult
     """
     print("====> Tool is called <====")
-    return f"Your Answer is: {n1 * n2}"
+    return f"your answer is: {n1 * n2}"

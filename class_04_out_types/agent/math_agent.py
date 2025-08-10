@@ -6,7 +6,7 @@ math_teacher = Agent(
     name="Talha",
     instructions="You are a helpful math teacher.",
     model=config.model,
-    tools=[add, subtract, multiply],
+    tools=[add],
 )
 
 agent = Agent(
@@ -18,5 +18,6 @@ agent = Agent(
             tool_name="math_teacher",
             tool_description="A math teacher who can perform basic arithmetic operations like addition, subtraction, and multiplication."
         )
-    ]
+    ],
+    tool_use_behavior="stop_on_first_tool"
 )

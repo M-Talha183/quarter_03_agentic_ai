@@ -1,5 +1,5 @@
 from agents import Runner, set_tracing_disabled
-from agent.math_agent import agent
+from agent.math_agent import agent, math_teacher
 
 # set_tracing_disabled(True)
 
@@ -11,7 +11,7 @@ from agent.math_agent import agent
 # print(res.final_output)
 if __name__ == "__main__":
     res = Runner.run_sync(
-        starting_agent=agent,
+        starting_agent=math_teacher,
         input="what is 2 + 2?",
         # run_config=config
     )
