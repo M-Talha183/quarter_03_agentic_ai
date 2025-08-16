@@ -6,9 +6,9 @@ from agents import Agent , OpenAIChatCompletionsModel , Runner , set_tracing_exp
 load_dotenv()
 
 gemini_api_key = os.getenv("GEMINI_API_KEY")
-open_ai_api_key = os.getenv("OPEN_AI_API_KEY")
+# open_ai_api_key = os.getenv("OPEN_AI_API_KEY")
 
-set_tracing_export_api_key(open_ai_api_key)
+# set_tracing_export_api_key(open_ai_api_key)
 
 if not gemini_api_key:
     raise ValueError("Gemini api key can work please check it ")
